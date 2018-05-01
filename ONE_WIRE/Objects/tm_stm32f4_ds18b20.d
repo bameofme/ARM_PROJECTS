@@ -1,0 +1,13 @@
+.\objects\tm_stm32f4_ds18b20.o: tm_stm32f4_ds18b20\tm_stm32f4_ds18b20.c
+.\objects\tm_stm32f4_ds18b20.o: tm_stm32f4_ds18b20\tm_stm32f4_ds18b20.h
+.\objects\tm_stm32f4_ds18b20.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
+.\objects\tm_stm32f4_ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
+.\objects\tm_stm32f4_ds18b20.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\tm_stm32f4_ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h
+.\objects\tm_stm32f4_ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h
+.\objects\tm_stm32f4_ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h
+.\objects\tm_stm32f4_ds18b20.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h
+.\objects\tm_stm32f4_ds18b20.o: .\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
+.\objects\tm_stm32f4_ds18b20.o: ..\ONE_WIRE\stm32f4xx_conf.h
+.\objects\tm_stm32f4_ds18b20.o: .\tm_stm32f4_gpio\tm_stm32f4_gpio.h
+.\objects\tm_stm32f4_ds18b20.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
