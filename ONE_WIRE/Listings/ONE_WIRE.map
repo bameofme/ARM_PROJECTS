@@ -581,7 +581,7 @@ Removing Unused input sections from the image.
     Removing liquidcrystal_i2c.o(.rev16_text), (4 bytes).
     Removing liquidcrystal_i2c.o(.revsh_text), (4 bytes).
     Removing liquidcrystal_i2c.o(.rrx_text), (6 bytes).
-    Removing liquidcrystal_i2c.o(i.LCDI2C_Searching_Address), (132 bytes).
+    Removing liquidcrystal_i2c.o(i.LCDI2C_Searching_Address), (128 bytes).
     Removing liquidcrystal_i2c.o(i.LCDI2C_autoscroll), (32 bytes).
     Removing liquidcrystal_i2c.o(i.LCDI2C_blink), (32 bytes).
     Removing liquidcrystal_i2c.o(i.LCDI2C_blink_off), (8 bytes).
@@ -756,7 +756,7 @@ Removing Unused input sections from the image.
     Removing system_stm32f4xx.o(i.SystemCoreClockUpdate), (192 bytes).
     Removing system_stm32f4xx.o(.constdata), (24 bytes).
 
-201 unused section(s) (total 5812 bytes) removed from the image.
+201 unused section(s) (total 5808 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1640,24 +1640,24 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-        76         10          0          0          0       1057   button.o
-      1196        332         68          8          9       7598   ds18b20.o
-       272         36          0          8         16       2331   i2c.o
-        92         18          0          0          0       1446   led.o
-       634         54         16          8          0      15931   liquidcrystal_i2c.o
-       356        100          0          0          0     234275   main.o
-        26          0          0          8          0       3347   retar.o
-        64         26        408          0       1536        896   startup_stm32f411xe.o
-       242          0          0          0          0       9579   stm32f4xx_gpio.o
-       424         14          0          0          0      14242   stm32f4xx_i2c.o
-       324         34          0         16          0      20371   stm32f4xx_rcc.o
-       236          8          0          0          0      23689   stm32f4xx_usart.o
-       100         18          0          4          0       1335   system_stm32f4xx.o
-       312         40          0         17         24      33137   tm_stm32f4_delay.o
-       160         12          0          0          0       1168   usart2.o
+        76         10          0          0          0       1005   button.o
+      1196        332         68          8          9       7262   ds18b20.o
+       272         36          0          8         16       2199   i2c.o
+        92         18          0          0          0       1370   led.o
+       634         54         16          8          0      15439   liquidcrystal_i2c.o
+       356        100          0          0          0     234095   main.o
+        26          0          0          8          0       3219   retar.o
+        64         26        408          0       1536        872   startup_stm32f411xe.o
+       242          0          0          0          0       9431   stm32f4xx_gpio.o
+       424         14          0          0          0      13982   stm32f4xx_i2c.o
+       324         34          0         16          0      20199   stm32f4xx_rcc.o
+       236          8          0          0          0      23561   stm32f4xx_usart.o
+       100         18          0          4          0       1255   system_stm32f4xx.o
+       312         40          0         17         24      33005   tm_stm32f4_delay.o
+       160         12          0          0          0       1116   usart2.o
 
     ----------------------------------------------------------------------
-      4522        702        524         72       1588     370402   Object Totals
+      4522        702        524         72       1588     368010   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          0          3          3          0   (incl. Padding)
 
@@ -1736,8 +1736,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      9628        912        760         72       1688     366230   Grand Totals
-      9628        912        760         72       1688     366230   ELF Image Totals
+      9628        912        760         72       1688     363838   Grand Totals
+      9628        912        760         72       1688     363838   ELF Image Totals
       9628        912        760         72          0          0   ROM Totals
 
 ==============================================================================

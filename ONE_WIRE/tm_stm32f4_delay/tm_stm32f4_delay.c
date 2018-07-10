@@ -75,7 +75,7 @@ void SysTick_Handler(void) {
 				CustomTimers.Timers[i]->CNT = CustomTimers.Timers[i]->ARR;
 				
 				/* Disable timer if auto reload feature is not used */
-				if (!CustomTimers.Timers[i]->AutoReload) {
+			if (!CustomTimers.Timers[i]->AutoReload) {
 					/* Disable counter */
 					CustomTimers.Timers[i]->Enabled = 0;
 				}

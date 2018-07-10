@@ -301,7 +301,6 @@ void LCDI2C_write_String(char* str) {
 //Searching I2C address
 uint8_t LCDI2C_Searching_Address(void)
 {	
-	uint16_t a = 0;
 	for(uint8_t i = 0; i < 120; i++)
 	{			
 		lcdi2c.Addr = i;
