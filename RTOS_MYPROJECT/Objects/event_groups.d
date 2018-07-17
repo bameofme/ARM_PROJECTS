@@ -1,12 +1,12 @@
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\event_groups.c
+.\objects\event_groups.o: FreeRTOS\event_groups.c
 .\objects\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
+.\objects\event_groups.o: .\FreeRTOS\include\FreeRTOS.h
 .\objects\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\event_groups.o: ..\ONE_WIRE - Copy\FreeRTOSConfig.h
+.\objects\event_groups.o: ..\RTOS_MYPROJECT\FreeRTOSConfig.h
 .\objects\event_groups.o: .\TraceRecorder\include\trcRecorder.h
 .\objects\event_groups.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\event_groups.o: ..\ONE_WIRE - Copy\trcConfig.h
+.\objects\event_groups.o: ..\RTOS_MYPROJECT\trcConfig.h
 .\objects\event_groups.o: .\TraceRecorder\include\trcPortDefines.h
 .\objects\event_groups.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\event_groups.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
@@ -37,16 +37,16 @@
 .\objects\event_groups.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\event_groups.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\event_groups.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash_ramfunc.h
-.\objects\event_groups.o: ..\ONE_WIRE - Copy\trcSnapshotConfig.h
+.\objects\event_groups.o: ..\RTOS_MYPROJECT\trcSnapshotConfig.h
 .\objects\event_groups.o: .\TraceRecorder\include\trcHardwarePort.h
 .\objects\event_groups.o: .\TraceRecorder\include\trcKernelPort.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\projdefs.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\portable.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\deprecated_definitions.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\mpu_wrappers.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\task.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\list.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\timers.h
-.\objects\event_groups.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\event_groups.h
+.\objects\event_groups.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\event_groups.o: .\FreeRTOS\include\projdefs.h
+.\objects\event_groups.o: .\FreeRTOS\include\portable.h
+.\objects\event_groups.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\event_groups.o: .\FreeRTOS\include\portmacro.h
+.\objects\event_groups.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\event_groups.o: .\FreeRTOS\include\task.h
+.\objects\event_groups.o: .\FreeRTOS\include\list.h
+.\objects\event_groups.o: .\FreeRTOS\include\timers.h
+.\objects\event_groups.o: .\FreeRTOS\include\event_groups.h

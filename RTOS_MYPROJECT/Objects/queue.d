@@ -1,13 +1,13 @@
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\queue.c
+.\objects\queue.o: FreeRTOS\queue.c
 .\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
+.\objects\queue.o: .\FreeRTOS\include\FreeRTOS.h
 .\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\queue.o: ..\ONE_WIRE - Copy\FreeRTOSConfig.h
+.\objects\queue.o: ..\RTOS_MYPROJECT\FreeRTOSConfig.h
 .\objects\queue.o: .\TraceRecorder\include\trcRecorder.h
 .\objects\queue.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\queue.o: ..\ONE_WIRE - Copy\trcConfig.h
+.\objects\queue.o: ..\RTOS_MYPROJECT\trcConfig.h
 .\objects\queue.o: .\TraceRecorder\include\trcPortDefines.h
 .\objects\queue.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\queue.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
@@ -38,15 +38,15 @@
 .\objects\queue.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\queue.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\queue.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash_ramfunc.h
-.\objects\queue.o: ..\ONE_WIRE - Copy\trcSnapshotConfig.h
+.\objects\queue.o: ..\RTOS_MYPROJECT\trcSnapshotConfig.h
 .\objects\queue.o: .\TraceRecorder\include\trcHardwarePort.h
 .\objects\queue.o: .\TraceRecorder\include\trcKernelPort.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\projdefs.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\portable.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\deprecated_definitions.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\mpu_wrappers.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\task.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\list.h
-.\objects\queue.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\queue.h
+.\objects\queue.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\queue.o: .\FreeRTOS\include\projdefs.h
+.\objects\queue.o: .\FreeRTOS\include\portable.h
+.\objects\queue.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\queue.o: .\FreeRTOS\include\portmacro.h
+.\objects\queue.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\queue.o: .\FreeRTOS\include\task.h
+.\objects\queue.o: .\FreeRTOS\include\list.h
+.\objects\queue.o: .\FreeRTOS\include\queue.h

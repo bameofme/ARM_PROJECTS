@@ -41,24 +41,24 @@
 .\objects\main.o: I2C.h
 .\objects\main.o: LiquidCrystal_I2C.h
 .\objects\main.o: Delay_FUNC.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
+.\objects\main.o: .\FreeRTOS\include\FreeRTOS.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\main.o: ..\ONE_WIRE - Copy\FreeRTOSConfig.h
+.\objects\main.o: ..\RTOS_MYPROJECT\FreeRTOSConfig.h
 .\objects\main.o: .\TraceRecorder\include\trcRecorder.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\main.o: ..\ONE_WIRE - Copy\trcConfig.h
+.\objects\main.o: ..\RTOS_MYPROJECT\trcConfig.h
 .\objects\main.o: .\TraceRecorder\include\trcPortDefines.h
-.\objects\main.o: ..\ONE_WIRE - Copy\trcSnapshotConfig.h
+.\objects\main.o: ..\RTOS_MYPROJECT\trcSnapshotConfig.h
 .\objects\main.o: .\TraceRecorder\include\trcHardwarePort.h
 .\objects\main.o: .\TraceRecorder\include\trcKernelPort.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\projdefs.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\portable.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\deprecated_definitions.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\mpu_wrappers.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\task.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\list.h
+.\objects\main.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\main.o: .\FreeRTOS\include\projdefs.h
+.\objects\main.o: .\FreeRTOS\include\portable.h
+.\objects\main.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\main.o: .\FreeRTOS\include\portmacro.h
+.\objects\main.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\main.o: .\FreeRTOS\include\task.h
+.\objects\main.o: .\FreeRTOS\include\list.h
 .\objects\main.o: DS18B20.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\semphr.h
-.\objects\main.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\queue.h
+.\objects\main.o: .\FreeRTOS\include\semphr.h
+.\objects\main.o: .\FreeRTOS\include\queue.h

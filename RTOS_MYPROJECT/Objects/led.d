@@ -1,5 +1,5 @@
 .\objects\led.o: LED.c
-.\objects\led.o: ..\ONE_WIRE - Copy\LED.h
+.\objects\led.o: ..\RTOS_MYPROJECT\LED.h
 .\objects\led.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\led.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
 .\objects\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

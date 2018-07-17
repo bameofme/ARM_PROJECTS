@@ -1,12 +1,12 @@
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\portable\MemMang\heap_4.c
+.\objects\heap_4.o: FreeRTOS\include\heap_4.c
 .\objects\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
+.\objects\heap_4.o: FreeRTOS\include\FreeRTOS.h
 .\objects\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\heap_4.o: ..\ONE_WIRE - Copy\FreeRTOSConfig.h
+.\objects\heap_4.o: ..\RTOS_MYPROJECT\FreeRTOSConfig.h
 .\objects\heap_4.o: .\TraceRecorder\include\trcRecorder.h
 .\objects\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\heap_4.o: ..\ONE_WIRE - Copy\trcConfig.h
+.\objects\heap_4.o: ..\RTOS_MYPROJECT\trcConfig.h
 .\objects\heap_4.o: .\TraceRecorder\include\trcPortDefines.h
 .\objects\heap_4.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\heap_4.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
@@ -37,14 +37,14 @@
 .\objects\heap_4.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\heap_4.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\heap_4.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash_ramfunc.h
-.\objects\heap_4.o: ..\ONE_WIRE - Copy\trcSnapshotConfig.h
+.\objects\heap_4.o: ..\RTOS_MYPROJECT\trcSnapshotConfig.h
 .\objects\heap_4.o: .\TraceRecorder\include\trcHardwarePort.h
 .\objects\heap_4.o: .\TraceRecorder\include\trcKernelPort.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\projdefs.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\portable.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\deprecated_definitions.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\mpu_wrappers.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\task.h
-.\objects\heap_4.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\list.h
+.\objects\heap_4.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\heap_4.o: FreeRTOS\include\projdefs.h
+.\objects\heap_4.o: FreeRTOS\include\portable.h
+.\objects\heap_4.o: FreeRTOS\include\deprecated_definitions.h
+.\objects\heap_4.o: FreeRTOS\include\portmacro.h
+.\objects\heap_4.o: FreeRTOS\include\mpu_wrappers.h
+.\objects\heap_4.o: FreeRTOS\include\task.h
+.\objects\heap_4.o: FreeRTOS\include\list.h

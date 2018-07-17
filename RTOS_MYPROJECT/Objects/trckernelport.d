@@ -1,11 +1,11 @@
 .\objects\trckernelport.o: TraceRecorder\trcKernelPort.c
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
+.\objects\trckernelport.o: .\FreeRTOS\include\FreeRTOS.h
 .\objects\trckernelport.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\trckernelport.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\trckernelport.o: ..\ONE_WIRE - Copy\FreeRTOSConfig.h
+.\objects\trckernelport.o: ..\RTOS_MYPROJECT\FreeRTOSConfig.h
 .\objects\trckernelport.o: .\TraceRecorder\include\trcRecorder.h
 .\objects\trckernelport.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\trckernelport.o: ..\ONE_WIRE - Copy\trcConfig.h
+.\objects\trckernelport.o: ..\RTOS_MYPROJECT\trcConfig.h
 .\objects\trckernelport.o: .\TraceRecorder\include\trcPortDefines.h
 .\objects\trckernelport.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\trckernelport.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
@@ -36,15 +36,15 @@
 .\objects\trckernelport.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\trckernelport.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\trckernelport.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash_ramfunc.h
-.\objects\trckernelport.o: ..\ONE_WIRE - Copy\trcSnapshotConfig.h
+.\objects\trckernelport.o: ..\RTOS_MYPROJECT\trcSnapshotConfig.h
 .\objects\trckernelport.o: .\TraceRecorder\include\trcHardwarePort.h
 .\objects\trckernelport.o: .\TraceRecorder\include\trcKernelPort.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\projdefs.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\portable.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\deprecated_definitions.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\mpu_wrappers.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\task.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\list.h
-.\objects\trckernelport.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\queue.h
+.\objects\trckernelport.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\trckernelport.o: .\FreeRTOS\include\projdefs.h
+.\objects\trckernelport.o: .\FreeRTOS\include\portable.h
+.\objects\trckernelport.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\trckernelport.o: .\FreeRTOS\include\portmacro.h
+.\objects\trckernelport.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\trckernelport.o: .\FreeRTOS\include\task.h
+.\objects\trckernelport.o: .\FreeRTOS\include\list.h
+.\objects\trckernelport.o: .\FreeRTOS\include\queue.h

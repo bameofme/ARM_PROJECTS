@@ -114,26 +114,14 @@ void SystemCoreClockConfigure(void) {
   * @retval None
   */
 int main(void)
-{
-	//float reading_Temp;
-	uint32_t Delay_time;
-	Delay_time = 0xC8;
-	
-	SystemInit();
-	
-	//TM_DELAY_Init();
-	//SystemCoreClockConfigure(); 
-	//SystemCoreClockUpdate();
-	
-  //SysTick_Config(SystemCoreClock / 1000);	
-	
+{	
+	SystemInit();	
 	DELAY_Init();	  
 	LED_Init();
   BUTTON_INIT();
 	USART2_Init();
 	
 	putchar(12);			//Clearing the terminal
-	//printf("\n\rDallas DS18S20 demo\n\r");
 	init_I2C1();
 	
 	//Uncomment this to search for Slave Address	
@@ -149,75 +137,23 @@ int main(void)
 	OneWire_Init();
 	
 	LCDI2C_init(0x3F,20,4);
-//	for(int i = 0; i< 3; i++)
-//	{
-//    LCDI2C_backlight();
-//    Delay_ms(500);
-    LCDI2C_noBacklight();
-    Delay_ms(500);
-	//}
+	LCDI2C_noBacklight();
+	Delay_ms(500);
   LCDI2C_backlight();	
   LCDI2C_clear();	
 	
-	//Ping to One-wire device, reading ROM and report Scratchpad content 
-	/*PingOneWireNetwork();
-	ReportROM();
-	ReportScratchpad();
-	StartConversion();
-	Delay(750000);
-	ReportScratchpad();
-	
-  //Init LCD_I2C	
-	LCDI2C_init(0x3F,20,4);
-	for(int i = 0; i< 3; i++)
-	{
-    LCDI2C_backlight();
-    Delay(50);
-    LCDI2C_noBacklight();
-    Delay(50);
-	}
-  LCDI2C_backlight();	
-  LCDI2C_clear();	
-	
-	//Printing Welcome words
 	LCDI2C_setCursor(1,0);
 	LCDI2C_write_String("Welcome To Thesis");
 	LCDI2C_setCursor(1,2);	
 	LCDI2C_write_String("Temperature: ");
 	
-	while (1)
-  {
-		LED_ON();
-		Delay(50000);
-		LED_OFF();
-		Delay(50000);
-		if(BUTTON_STATE() & 1)
-		{
-			printf("Button is pressed \r\n");
-			Delay_time = Delay_time - 0x0A;
-			Delay(10);			
-		}
-		
-		//Using Convert-T DS18B20 command to ask for temperature data
-		StartConversion();
-		Delay(500);
-		
-		//
-		ReportTemperature();
-		Delay(5000);
-  }
-	*/
-		LCDI2C_setCursor(1,0);
-		LCDI2C_write_String("Welcome To Thesis");
-		LCDI2C_setCursor(1,2);	
-		LCDI2C_write_String("Temperature: ");
-	vTraceEnable(TRC_INIT);
+	
 	/* initialize the recorder */
-	vTraceEnable(TRC_START);
+	vTraceEnable(TRC_INIT);	
 	
 	/* start the recorder */
-  //uiTraceStart();
-	
+	vTraceEnable(TRC_START);
+  //uiTraceStart();	
 	
 	xSemaphore = xSemaphoreCreateBinary();
 	
@@ -227,14 +163,13 @@ int main(void)
 						"Task 1",	/* Text name for the task.  This is to facilitate debugging only. */
 						120,		/* Stack depth in words. */
 						NULL,		/* We are not using the task parameter. */
-						1,			/* This task will run at priority 1. */
+						2,			/* This task will run at priority 1. */
 						NULL );		/* We are not using the task handle. */
 
 		/* Create the other task in exactly the same way. */
 		xTaskCreate( vTask2, "Task 2", 120, NULL, 1, NULL );
-		
-		/* lets create the binary semaphore dynamically */
-		
+		xTaskCreate( vTask3, "Task 3", 120, NULL, 1, NULL );
+		/* lets create the binary semaphore dynamically */		
 		
 		/* lets make the semaphore token available for the first time */
 		//xSemaphoreGive( xSemaphore);
@@ -250,36 +185,20 @@ void vTask1( void *pvParameters )
 const char *pcTaskName = "Task 1 is running\r\n";
 volatile unsigned long ul;
 const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
+TickType_t xLastWakeTime;
+const TickType_t xFrequency = 1000;
+	
+	xLastWakeTime = xTaskGetTickCount();
 	
 	/* As per most tasks, this task is implemented in an infinite loop. */
 	for( ;; )
 	{
-		/* Print out the name of this task. */
-		/* lets make the sema un-available */
-	
-//		while(xSemaphoreTake( xSemaphore, ( TickType_t ) portMAX_DELAY ))
-//		{
 	  printf( "%s\n",pcTaskName );
 		LED_ON();
-		/* lets make the sema available */
-		StartConversion();
-		//Delay_ms(500);
-		vTaskDelay( xDelay );
-		reading_Temp = ReportTemperature_2();
-		//Delay_ms(5000);
-		
+		readingFunction();
 		xSemaphoreGive( xSemaphore);
-		vTaskDelay( xDelay * 10 );
-		//}
-		//vTaskDelay( xDelay );
-		
-		/* Delay for a period. */
-//		for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ )
-//		{
-//			/* This loop is just a very crude delay implementation.  There is
-//			nothing to do in here.  Later exercises will replace this crude
-//			loop with a proper delay/sleep function. */
-//		}
+		//vTaskDelay( xDelay );		
+		vTaskDelayUntil( &xLastWakeTime, xFrequency );
 	}
 }
 /*-----------------------------------------------------------*/
@@ -289,57 +208,62 @@ void vTask2( void *pvParameters )
 const char *pcTaskName = "Task 2 is running\r\n";
 volatile unsigned long ul;
 char 					str_buf[7];
+const TickType_t xDelay = 1000 / portTICK_PERIOD_MS;
+	
+	/* As per most tasks, this task is implemented in an infinite loop. */
+	for( ;; )
+	{
+		if(xSemaphoreTake( xSemaphore, ( TickType_t ) portMAX_DELAY )==pdTRUE)
+		{
+	  	printf( "%s\n",pcTaskName );
+			LED_OFF();
+			sprintf(str_buf, "%0.2f", reading_Temp);
+			displayFunction(str_buf);			
+			xSemaphoreGive( xSemaphore);
+			vTaskDelay( xDelay );
+			
+		}
+		else        
+		{
+			printf("Cannot take the Semaphore");
+		}
+	}
+}
+
+void vTask3( void *pvParameters )
+{
+const char *pcTaskName = "Task 3 is running\r\n";
+volatile unsigned long ul;
 const TickType_t xDelay = 500 / portTICK_PERIOD_MS;
 	
 	/* As per most tasks, this task is implemented in an infinite loop. */
 	for( ;; )
 	{
-		
-//		LED_OFF();
-//		LCDI2C_setCursor(1,0);
-//		LCDI2C_write_String("Welcome To Thesis");
-//		LCDI2C_setCursor(1,2);	
-//		LCDI2C_write_String("Temperature: ");
-		
-		
-		/* Print out the name of this task. */
-		/* lets make the sema un-available */
-		while(xSemaphoreTake( xSemaphore, ( TickType_t ) portMAX_DELAY ))
+		if(xSemaphoreTake( xSemaphore, ( TickType_t ) portMAX_DELAY )==pdTRUE)
 		{
-		LED_OFF();
-		LCDI2C_setCursor(13,2);		
-		LCDI2C_write_String("       ");	
-		LCDI2C_setCursor(13,2);		
-		sprintf(str_buf, "%0.2f", reading_Temp);
-//		xSemaphoreGive( xSemaphore);
-	  	printf( "%s\n",pcTaskName );
-			printf("\rDisplay to LCD \n\n\r");
-		
-		/* lets make the sema available */
-		//sprintf(str_buf, "%0.2f", reading_Temp);	
-		
-		
-		LCDI2C_write_String(str_buf);
-		 //vTaskDelay( xDelay );
-		//Delay_ms(5000);
-		
-		//xSemaphoreGive( xSemaphore);
-			vTaskDelay( xDelay *10 );
-		}
-//		vTaskDelay( xDelay );
-		/* Delay for a period. */
-//	for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ )
-//		{
-//			/* This loop is just a very crude delay implementation.  There is
-//			nothing to do in here.  Later exercises will replace this crude
-//			loop with a proper delay/sleep function. */
-//		}
+			printf( "%s\n",pcTaskName );
+			vTaskDelay( xDelay );
+		}			
 	}
 }
 
 
+void readingFunction()
+{
+	StartConversion();
+	Delay_ms(100);
+	reading_Temp = ReportTemperature_2();
+	//Delay_ms(1500);
+}
 
 
+void displayFunction(char *str)
+{
+	LCDI2C_setCursor(13,2);		
+	LCDI2C_write_String("       ");	
+	LCDI2C_setCursor(13,2);
+	LCDI2C_write_String(str);	
+}
 
 #ifdef  USE_FULL_ASSERT
 

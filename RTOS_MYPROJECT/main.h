@@ -61,6 +61,11 @@
 /* The task functions prototype*/
 void vTask1( void *pvParameters );
 void vTask2( void *pvParameters );
+void vTask3( void *pvParameters );
+
+
+void readingFunction(	void );
+void displayFunction( char *str);
 
 SemaphoreHandle_t xSemaphore = NULL;
 

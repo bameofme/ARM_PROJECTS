@@ -9,7 +9,7 @@
 void DELAY_Init 	(void);
 void Delay_us			(uint32_t us);
 void Delay_ms			(uint32_t ms);
-void Delay				(uint32_t s);
+void Delay_s			(uint32_t s);
 
 
 

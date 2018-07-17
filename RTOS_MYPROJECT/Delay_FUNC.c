@@ -38,7 +38,7 @@ void Delay_ms(uint32_t ms)
 	__enable_irq();
 }
 
-void Delay(uint32_t s)
+void Delay_s(uint32_t s)
 {
 	uint32_t temp = s * 1000000 ;
 	__disable_irq();

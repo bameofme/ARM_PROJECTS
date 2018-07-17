@@ -1,12 +1,12 @@
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\stream_buffer.c
+.\objects\stream_buffer.o: FreeRTOS\stream_buffer.c
 .\objects\stream_buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\stream_buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\FreeRTOS.h
 .\objects\stream_buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\stream_buffer.o: ..\ONE_WIRE - Copy\FreeRTOSConfig.h
+.\objects\stream_buffer.o: ..\RTOS_MYPROJECT\FreeRTOSConfig.h
 .\objects\stream_buffer.o: .\TraceRecorder\include\trcRecorder.h
 .\objects\stream_buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\stream_buffer.o: ..\ONE_WIRE - Copy\trcConfig.h
+.\objects\stream_buffer.o: ..\RTOS_MYPROJECT\trcConfig.h
 .\objects\stream_buffer.o: .\TraceRecorder\include\trcPortDefines.h
 .\objects\stream_buffer.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\stream_buffer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
@@ -37,15 +37,15 @@
 .\objects\stream_buffer.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\stream_buffer.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\stream_buffer.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash_ramfunc.h
-.\objects\stream_buffer.o: ..\ONE_WIRE - Copy\trcSnapshotConfig.h
+.\objects\stream_buffer.o: ..\RTOS_MYPROJECT\trcSnapshotConfig.h
 .\objects\stream_buffer.o: .\TraceRecorder\include\trcHardwarePort.h
 .\objects\stream_buffer.o: .\TraceRecorder\include\trcKernelPort.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\FreeRTOS.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\projdefs.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\portable.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\deprecated_definitions.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\mpu_wrappers.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\task.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\list.h
-.\objects\stream_buffer.o: ..\..\..\..\..\Downloads\FreeRTOSv10.0.1\FreeRTOS\Source\include\stream_buffer.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\projdefs.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\portable.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\portmacro.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\task.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\list.h
+.\objects\stream_buffer.o: .\FreeRTOS\include\stream_buffer.h
