@@ -106,8 +106,6 @@ void SystemCoreClockConfigure(void) {
 
 
 
-
-
 /**
   * @brief  Main program
   * @param  None
