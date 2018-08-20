@@ -49,14 +49,14 @@
 #include "ADC_CTR_FAN.h"
 
 #if defined (HSI_VALUE)
-	
-	#undef 	HSI_VALUE
-	#define HSI_VALUE			((uint32_t)16000000ul)
+  
+  #undef  HSI_VALUE
+  #define HSI_VALUE     ((uint32_t)16000000ul)
 #endif
 
 
 /* Used as a loop counter to create a very crude delay. */
-#define mainDELAY_LOOP_COUNT		( 0xfffff )
+#define mainDELAY_LOOP_COUNT    ( 0xfffff )
 
 #define DelayUntil
 //#define DEBUG_BY_TICK
@@ -69,9 +69,10 @@ void vTask4( void *pvParameters );
 
 
 void checking_Button( void );
-void readingFunction(	void );
-void displayFunction( char *str);
-void driving_Fan(const volatile float *temperature);
+void readingFunction( void );
+void displayFunction( char *str, char *mode);
+void auto_Fan(const volatile float *temperature);
+void driving_Fan(const uint16_t *value);
 
 SemaphoreHandle_t xSemaphore = NULL;
 TaskHandle_t xTask4 = NULL;
@@ -85,10 +86,10 @@ TaskHandle_t xTask4 = NULL;
 void TimingDelay_Decrement(void);
 
 
-volatile float 						reading_Temp		= 0	;
-static volatile uint8_t		user_Mode				= 0	;
-volatile uint32_t					debug_Timing		= 0 ;
-volatile uint8_t 					sensor_detected = 0xFF;
+volatile float            reading_Temp    = 0 ;
+static volatile uint8_t   user_Mode       = 0 ;
+volatile uint32_t         debug_Timing    = 0 ;
+volatile uint8_t          sensor_detected = 0xFF;
 
 
 

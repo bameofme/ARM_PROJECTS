@@ -70,7 +70,7 @@ int main(void)
   LCDI2C_backlight();	
   LCDI2C_clear();	
 	
-	LCDI2C_setCursor(1,0);
+	LCDI2C_setCursor(2,0);
 	LCDI2C_write_String("Welcome To Thesis");
 	LCDI2C_setCursor(1,2);	
 	LCDI2C_write_String("Temperature: ");
@@ -170,11 +170,11 @@ TickType_t xLastWakeTime;
 ***/
 void vTask2( void *pvParameters )
 {
-const char *pcTaskName = "Task 2 is running\r\n";
-volatile unsigned long ul;
-char 					str_buf[7];
-const TickType_t xDelay = 350 / portTICK_PERIOD_MS;
-	
+const char 								*pcTaskName = "Task 2 is running\r\n";
+volatile unsigned long 		ul;
+char 											str_buf[7];
+const 										TickType_t xDelay = 350 / portTICK_PERIOD_MS;
+char											*mode[] = {"Auto Mode", "User Mode"};
 	/* As per most tasks, this task is implemented in an infinite loop. */
 	for( ;; )
 	{
@@ -187,8 +187,14 @@ const TickType_t xDelay = 350 / portTICK_PERIOD_MS;
 	  	printf( "%s\n",pcTaskName );
 //			LED_OFF();
 			sprintf(str_buf, "%0.2f", reading_Temp);
-			displayFunction(str_buf);		
-			
+			if(user_Mode != 0)								//Enter User_Mode
+			{
+				displayFunction(str_buf, mode[1]);		
+			}
+			else
+			{
+				displayFunction(str_buf, mode[0]);
+			}
 			#ifdef DEBUG_BY_TICK
 				printf("\rTich Count END Task 2: %d\n", xTaskGetTickCount());
 			#endif
@@ -212,7 +218,6 @@ void vTask3( void *pvParameters )
 const char *pcTaskName = "Task 3 is running\r\n";
 volatile unsigned long ul;
 const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
-
 
 	/* As per most tasks, this task is implemented in an infinite loop. */
 	for( ;; )
@@ -242,10 +247,9 @@ const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
 				{					
 					vTaskDelete(xTask4);
 					xTask4 = NULL;
-				}
-				
-				driving_Fan(&reading_Temp);
-				printf( "FAN speed: %d%%\r\n\n",TIM5->CCR1);				//Print the FAN's speed	
+				}				
+				auto_Fan(&reading_Temp);
+				printf( "FAN speed: %d%%\r\n\n",100 - (TIM5->CCR1 *100) /65535);				//Print the FAN's speed	
 			}
 			
 			#ifdef DEBUG_BY_TICK
@@ -270,9 +274,8 @@ void vTask4( void *pvParameters )
 	const char 								*pcTaskName 				= "Task 4 is running\r\n";
 	volatile unsigned long 		ul;
 	const 										TickType_t xDelay 	= 100 / portTICK_PERIOD_MS;
-	char 											adc_buf[7];
-	volatile uint16_t					reading_ADC;			
-	
+	uint16_t									reading_ADC;			
+	uint16_t									fan_Speed;
 	for( ;; )
 	{
 		
@@ -283,11 +286,12 @@ void vTask4( void *pvParameters )
 			#endif
 			
 			printf( "%s\n",pcTaskName );
-			reading_ADC = ADC_Read() ;			
+			reading_ADC = ADC_Read()  ;	
+			reading_ADC = (reading_ADC * 100) / 0x0FFF;
 			printf("FAN's speed: ");
-			//sprintf(adc_buf, "%u", reading_ADC);
 			printf("%d%%\r\n\n",reading_ADC);
-			
+			fan_Speed = 100 - reading_ADC;							//Calculating fan_Speed 
+			driving_Fan(&fan_Speed);										//Driving motor - FAN
 			#ifdef DEBUG_BY_TICK
 				printf("\rTich Count END Task 4: %d\n", xTaskGetTickCount());
 			#endif
@@ -307,26 +311,40 @@ void readingFunction()
 	reading_Temp = ReportTemperature_2();
 }
 
-void driving_Fan(const volatile float *temperature)
+
+void auto_Fan(const volatile float *temperature)
 {
+	uint16_t speed_Value;
 	if(*temperature > 15 && *temperature <= 20)
 	{
-		TIM5->CCR1 = 75 * 65535 / 100;  // 75% Duty cycle
+		speed_Value = 75;																		//		TIM5->CCR1 = 75 * 65535 / 100;  // 75% Duty cycle
+		driving_Fan(&speed_Value);
 	}
 	else if(*temperature > 20 && *temperature <= 30)
 	{
-		TIM5->CCR1 = 40 * 65535 / 100;  // 40% Duty cycle
+		speed_Value = 40;																		//		TIM5->CCR1 = 40 * 65535 / 100;  // 40% Duty cycle
+		driving_Fan(&speed_Value);
 	}
 	else if(*temperature > 30)
 	{
-		TIM5->CCR1 = 10 * 65535 / 100;  // 10% Duty cycle
+		speed_Value = 10;																		//		TIM5->CCR1 = 10 * 65535 / 100;  // 10% Duty cycle
+		driving_Fan(&speed_Value);
 	}	
 }
 
 
-
-void displayFunction(char *str)
+void driving_Fan(const uint16_t *value)
 {
+	TIM5->CCR1 = *value * 65535 / 100;
+}
+
+
+void displayFunction(char *str, char *mode)
+{
+	LCDI2C_setCursor(6,1);		
+	LCDI2C_write_String("    ");
+	LCDI2C_setCursor(6,1);
+	LCDI2C_write_String(mode);
 	LCDI2C_setCursor(13,2);		
 	LCDI2C_write_String("       ");	
 	LCDI2C_setCursor(13,2);
