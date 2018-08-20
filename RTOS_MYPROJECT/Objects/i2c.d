@@ -1,16 +1,16 @@
 .\objects\i2c.o: I2C.c
 .\objects\i2c.o: I2C.h
-.\objects\i2c.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
+.\objects\i2c.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\i2c.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
 .\objects\i2c.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\i2c.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h
 .\objects\i2c.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h
 .\objects\i2c.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h
 .\objects\i2c.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h
-.\objects\i2c.o: .\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
+.\objects\i2c.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\stm32f4xx_conf.h
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
-.\objects\i2c.o: .\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
+.\objects\i2c.o: C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_crc.h
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dbgmcu.h
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_dma.h
@@ -30,7 +30,4 @@
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\objects\i2c.o: .\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_flash_ramfunc.h
-.\objects\i2c.o: .\tm_stm32f4_delay\tm_stm32f4_delay.h
-.\objects\i2c.o: .\tm_stm32f4_delay\attributes.h
-.\objects\i2c.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\i2c.o: I2C.h

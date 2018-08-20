@@ -40,7 +40,7 @@ void  PingOneWireNetwork(void)
 	*/
 void  StartConversion(void)
 {
-	printf("\n\rSending command to start conversion.");
+	printf("\rSending command to start conversion.");
 	SendInitialization();
 	Delay_us(100);
 	SendByte(SKIP_ROM);
@@ -93,12 +93,12 @@ void  ReportTemperature(void)
 	Delay_ms(5000);
 }
 
+
 float ReportTemperature_2(void)
 {
 	uint32_t			val;
 	float					temp;
 	uint8_t				n;
-	char 					str_buf[7];
 	
 	SendInitialization();
 	Delay_us(100);
@@ -109,22 +109,10 @@ float ReportTemperature_2(void)
 		reading_pad[n] = ReadByte();
 	}
 	val = (reading_pad[1] <<8) | reading_pad[0];			//Combine two bytes 
-	temp = (float)val/16;																//Converting byte value into temperature data 
+	temp = (float)val/16;															//Converting byte value into temperature data 
 	printf("\n\r 2 byte of temperature");
 	printf("\n\r     %02x %02x", reading_pad[1], reading_pad[0]);
-	printf("\n\rTemperature is: %0.2f degrees C\r\n\n", temp);
-	
-//	//Using sprint to convert int value to string
-//	sprintf(str_buf, "%0.2f", temp);	
-//	
-//	//Using this to print the value to LCD-display	
-//	LCDI2C_setCursor(13,2);		
-//	LCDI2C_write_String("       ");
-//	
-//	LCDI2C_setCursor(13,2);		
-//	LCDI2C_write_String(str_buf);
-//	
-	Delay_ms(5000);
+	printf("\n\rTemperature is: %0.4f degrees C\r\n\n", temp);
 	return temp;
 }
 
@@ -176,23 +164,22 @@ void  ReportScratchpad(void)
 
 /**
 	*Sending reset pulse to DS18B20 device to initializate.
-	*Pulling HIGH the DQ line in 500us
 	*Pulling LOW	the DQ line in 500us - to send reset pulse
 	*Releasing 		the DQ line
 	*Then Reading the DQ line 
 	*/
 void  SendInitialization(void)
 {
-	ONEWIRE_OUTPUT_HIGH;			//pull to high 
+	ONEWIRE_OUTPUT_HIGH;			//pull to HIGH 
 	ONEWIRE_CONFIG_OUTPUT;
-	Delay_us(500);
-
-	ONEWIRE_OUTPUT_LOW;				//pull to low
-	Delay_us(500);
-
-	ONEWIRE_OUTPUT_HIGH;			//releasing bus
-	ONEWIRE_CONFIG_INPUT;
 	Delay_us(50);
+
+	ONEWIRE_OUTPUT_LOW;				//pull to LOW
+	Delay_us(500);
+
+//	ONEWIRE_OUTPUT_HIGH;			
+	ONEWIRE_CONFIG_INPUT;			//releasing bus
+	Delay_us(500);
 }
 
 
@@ -223,14 +210,14 @@ uint8_t  ReadByte(void)
 	for (n=0; n<8; n++)
 	{
 		val = val >> 1;
-		ONEWIRE_OUTPUT_LOW;
-		ONEWIRE_CONFIG_OUTPUT;
-		Delay_us(5);
 		ONEWIRE_OUTPUT_HIGH;
+		ONEWIRE_CONFIG_OUTPUT;
+		Delay_us(3);
+		ONEWIRE_OUTPUT_LOW;
 		ONEWIRE_CONFIG_INPUT;
 		Delay_us(10);
-		if (ONEWIRE_INPUT_READ)  {val |= 0x80;}
-		Delay_us(35);
+		if (ONEWIRE_INPUT_READ)  {val |= 0x80;} 	//0x80 = 1000 0000
+		Delay_us(60);
 	} 
 	return  val;
 }

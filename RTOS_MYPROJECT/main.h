@@ -31,15 +31,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
-#include "stm32f4xx_gpio.h"
+//#include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "LED.h"
 #include "BUTTON.h"
 #include "USART2.h"
 #include <stdio.h>
-//#include "tm_stm32f4_timer_properties.h"
-//#include "tm_stm32f4_delay.h"
-#include "stm32f4xx_i2c.h"
+//#include "stm32f4xx_i2c.h"
 #include "I2C.h"
 #include "LiquidCrystal_I2C.h"
 #include "DS18B20.h"
@@ -47,6 +45,8 @@
 #include "semphr.h"
 #include "task.h"
 #include "Delay_FUNC.h"
+#include "CTR_FAN.h"
+#include "ADC_CTR_FAN.h"
 
 #if defined (HSI_VALUE)
 	
@@ -58,16 +58,25 @@
 /* Used as a loop counter to create a very crude delay. */
 #define mainDELAY_LOOP_COUNT		( 0xfffff )
 
+#define DelayUntil
+//#define DEBUG_BY_TICK
+
 /* The task functions prototype*/
 void vTask1( void *pvParameters );
 void vTask2( void *pvParameters );
 void vTask3( void *pvParameters );
+void vTask4( void *pvParameters );
 
 
+void checking_Button( void );
 void readingFunction(	void );
 void displayFunction( char *str);
+void driving_Fan(const volatile float *temperature);
 
 SemaphoreHandle_t xSemaphore = NULL;
+TaskHandle_t xTask4 = NULL;
+
+
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -75,7 +84,13 @@ SemaphoreHandle_t xSemaphore = NULL;
 /* Exported functions ------------------------------------------------------- */
 void TimingDelay_Decrement(void);
 
-volatile float reading_Temp;
+
+volatile float 						reading_Temp		= 0	;
+static volatile uint8_t		user_Mode				= 0	;
+volatile uint32_t					debug_Timing		= 0 ;
+volatile uint8_t 					sensor_detected = 0xFF;
+
+
 
 #endif /* __MAIN_H */
 

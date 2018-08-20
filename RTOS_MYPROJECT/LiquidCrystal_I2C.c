@@ -2,7 +2,7 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_i2c.h"
-#include "tm_stm32f4_delay.h"
+//#include "tm_stm32f4_delay.h"
 #include "I2C.h"
 #include "LiquidCrystal_I2C.h"
 
@@ -251,10 +251,10 @@ void LCDI2C_expanderWrite(uint8_t _data){
 
 void LCDI2C_pulseEnable(uint8_t _data){
 	LCDI2C_expanderWrite(_data | En);	// En high
-	Delay_ms(1);		// enable pulse must be >450ns
+	Delay_us(1);		// enable pulse must be >450ns
 
 	LCDI2C_expanderWrite(_data & ~En);	// En low
-	Delay_ms(50);		// commands need > 37us to settle
+	Delay_us(40);		// commands need > 37us to settle
 }
 
 
@@ -321,9 +321,7 @@ uint8_t LCDI2C_Searching_Address(void)
 			I2C_GenerateSTOP(I2C1, ENABLE);
 		}
 	}	
-	return 0;
-	
-	
+	return 0;	
 }
 
 
