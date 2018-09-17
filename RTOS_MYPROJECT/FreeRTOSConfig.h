@@ -81,7 +81,7 @@ extern uint32_t SystemCoreClock;
 #define configIDLE_SHOULD_YIELD			1
 #define configUSE_MUTEXES				1
 #define configQUEUE_REGISTRY_SIZE		8
-#define configCHECK_FOR_STACK_OVERFLOW	0
+#define configCHECK_FOR_STACK_OVERFLOW	1
 #define configUSE_RECURSIVE_MUTEXES		1
 #define configUSE_MALLOC_FAILED_HOOK	1
 #define configUSE_APPLICATION_TASK_TAG	0
@@ -159,5 +159,8 @@ header file. */
 #include "trcRecorder.h"
 #endif
 
+
+//#define traceTASK_SWITCHED_IN() taskSwitchIn_Debugger(pxCurrentTCB->pcTaskName )
+//#define traceTASK_SWITCHED_OUT() taskSwitchOut_Debugger(pxCurrentTCB->pcTaskName )
 #endif /* FREERTOS_CONFIG_H */
 

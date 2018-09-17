@@ -65,10 +65,10 @@ int main(void)
 	OneWire_Init();
 	
 	LCDI2C_init(0x3F,20,4);
-	LCDI2C_noBacklight();
-	Delay_ms(500);
-  LCDI2C_backlight();	
-  LCDI2C_clear();	
+//	LCDI2C_noBacklight();
+//	Delay_ms(500);
+//  LCDI2C_backlight();	
+//  LCDI2C_clear();	
 	
 	LCDI2C_setCursor(2,0);
 	LCDI2C_write_String("Welcome To Thesis");
@@ -89,13 +89,17 @@ int main(void)
 	//vTraceEnable(TRC_START);
   //uiTraceStart();	
 	
+	//Relevant to this: https://www.freertos.org/RTOS-Cortex-M3-M4.html
+	NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+	
+	
 	xSemaphore = xSemaphoreCreateBinary();
 	
 	if(xSemaphore != NULL)
 	{		
 		xTaskCreate(	vTask1,		/* Pointer to the function that implements the task. */
 						"Task 1",	/* Text name for the task.  This is to facilitate debugging only. */
-						200,		/* Stack depth in words. 120 * 4  */
+						200,		/* Stack depth in words. 200 * 4  */
 						NULL,		/* We are not using the task parameter. */
 						1,			/* This task will run at priority 1. */
 						NULL );		/* We are not using the task handle. */
@@ -144,16 +148,14 @@ TickType_t xLastWakeTime;
 			#endif
 			
 			printf( "%s\n",pcTaskName );
-			//LED_ON();
 			readingFunction();
 			
-//			vTaskDelayUntil( &xLastWakeTime, xDelay );
 			#ifdef DEBUG_BY_TICK
 				printf("\rTich Count END Task 1: %d\n", xTaskGetTickCount());
-			#endif
-			
+			#endif			
 
 			xSemaphoreGive( xSemaphore);
+			
 			#ifdef DelayOnly
 				vTaskDelay( xDelay );		
 			#endif
@@ -185,7 +187,6 @@ char											*mode[] = {"Auto Mode", "User Mode"};
 			#endif			
 
 	  	printf( "%s\n",pcTaskName );
-//			LED_OFF();
 			sprintf(str_buf, "%0.2f", reading_Temp);
 			if(user_Mode != 0)								//Enter User_Mode
 			{
@@ -230,7 +231,21 @@ const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
 
 			printf( "%s\n",pcTaskName );
 //			checking_Button();
-						
+			
+			/*Checking if *flag* from the interrupt function is SET.
+				It would delay from amount of time because of the unstable of the button.
+				Then reset the flag for the next time.
+				If the flag is SET -> switching modes (Auto_Mode and User_Mode)*/
+			if(flag == SET)									
+			{
+				vTaskDelay(125/portTICK_PERIOD_MS);
+				flag = RESET;
+				user_Mode = ~user_Mode;
+			}
+			
+			//Enter the user_Mode or Auto_mode by checking the user_Mode variable
+			//The user_Mode would driving the FAN speed manually by changing the potentiometer - from the ADC
+			//The auto_Mode would driving the FAN speed automatically by its algorithms according to the temperature data from sensor 
 			if(user_Mode != 0)								//Enter User_Mode
 			{
 				LED_ON();
@@ -240,7 +255,7 @@ const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
 					xTaskCreate( vTask4, "Task 4", 200, NULL, 1, &xTask4 );
 				}
 			}			
-			else															//Enter Auto_Mode
+			else if(user_Mode == 0)						//Enter Auto_Mode
 			{				
 				LED_OFF();
 				if( xTask4 != NULL)
@@ -289,8 +304,8 @@ void vTask4( void *pvParameters )
 			reading_ADC = ADC_Read()  ;	
 			reading_ADC = (reading_ADC * 100) / 0x0FFF;
 			printf("FAN's speed: ");
-			printf("%d%%\r\n\n",reading_ADC);
-			fan_Speed = 100 - reading_ADC;							//Calculating fan_Speed 
+			printf("%d%%\r\n\n",reading_ADC);						//Monitor in percentage
+			fan_Speed = 100 - reading_ADC;							//Calculating fan_Speed to duty-cycle
 			driving_Fan(&fan_Speed);										//Driving motor - FAN
 			#ifdef DEBUG_BY_TICK
 				printf("\rTich Count END Task 4: %d\n", xTaskGetTickCount());
@@ -315,23 +330,22 @@ void readingFunction()
 void auto_Fan(const volatile float *temperature)
 {
 	uint16_t speed_Value;
-	if(*temperature > 15 && *temperature <= 20)
+	if(*temperature > 20 && *temperature <= 24)
 	{
 		speed_Value = 75;																		//		TIM5->CCR1 = 75 * 65535 / 100;  // 75% Duty cycle
 		driving_Fan(&speed_Value);
 	}
-	else if(*temperature > 20 && *temperature <= 30)
+	else if(*temperature > 24 && *temperature <= 27)
 	{
 		speed_Value = 40;																		//		TIM5->CCR1 = 40 * 65535 / 100;  // 40% Duty cycle
 		driving_Fan(&speed_Value);
 	}
-	else if(*temperature > 30)
+	else if(*temperature > 27)
 	{
 		speed_Value = 10;																		//		TIM5->CCR1 = 10 * 65535 / 100;  // 10% Duty cycle
 		driving_Fan(&speed_Value);
 	}	
 }
-
 
 void driving_Fan(const uint16_t *value)
 {
@@ -375,18 +389,33 @@ void EXTI1_IRQHandler(void) {
 	/* Make sure that interrupt flag is set */
 	if (EXTI_GetITStatus(EXTI_Line1) != RESET) {
 		
-		user_Mode = ~user_Mode;
+		flag = SET;
+//		user_Mode = ~user_Mode;
+		
 //		LED_ON();
-		for(uint32_t i = 0; i < 450000; i++)	//Delay ~196ms -- ~174ms with 400.000
-		{
-			__asm__("nop");											
-		}
-		/* Clear interrupt flag */
+//		for(uint32_t i = 0; i < 450000; i++)	//Delay ~196ms -- ~174ms with 400.000
+//		{
+//			__asm__("nop");											
+//		}		
 //		LED_OFF();
+		
+		/* Clear interrupt flag */
 		EXTI_ClearITPendingBit(EXTI_Line1);
 	}
 }
 
+
+
+
+void taskSwitchIn_Debugger(char *taskName)
+{
+	LED_ON();
+}
+
+void taskSwitchOut_Debugger(char *taskName)
+{
+	LED_OFF();
+}
 
 #ifdef  USE_FULL_ASSERT
 
@@ -440,6 +469,11 @@ void vApplicationGetIdleTaskMemory(void)
 void vApplicationGetTimerTaskMemory(void)
 {
 	
+}
+
+
+void vApplicationStackOverflowHook(void)
+{
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

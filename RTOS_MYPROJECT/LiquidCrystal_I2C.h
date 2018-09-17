@@ -6,7 +6,6 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_i2c.h"
-//#include "tm_stm32f4_delay.h"
 #include "I2C.h"
 #include "Delay_FUNC.h"
 

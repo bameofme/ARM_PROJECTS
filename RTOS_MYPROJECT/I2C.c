@@ -9,8 +9,7 @@ void init_I2C1(void)
 {
     // Enable periphrals clock
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
-		
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);		
 		
 		// I2C output pin
     i2c_gpio.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9;
@@ -18,12 +17,10 @@ void init_I2C1(void)
     i2c_gpio.GPIO_Speed = GPIO_Speed_50MHz;
 		i2c_gpio.GPIO_OType =	GPIO_OType_OD;
 		i2c_gpio.GPIO_PuPd 	=	GPIO_PuPd_UP;
-    GPIO_Init(GPIOB, &i2c_gpio);
-		
+    GPIO_Init(GPIOB, &i2c_gpio);		
 		
 		GPIO_PinAFConfig(GPIOB, GPIO_PinSource8, GPIO_AF_I2C1);
-		GPIO_PinAFConfig(GPIOB, GPIO_PinSource9, GPIO_AF_I2C1);
-	
+		GPIO_PinAFConfig(GPIOB, GPIO_PinSource9, GPIO_AF_I2C1);	
 	
     // Setting value for I2C 
     i2c.I2C_ClockSpeed = 100000;						// 100kHz
@@ -33,9 +30,7 @@ void init_I2C1(void)
     i2c.I2C_OwnAddress1 = 0x00;							
     i2c.I2C_Ack = I2C_Ack_Enable;
     i2c.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
-    I2C_Init(I2C1, &i2c);
-
-    
+    I2C_Init(I2C1, &i2c);    
 		
     // Enable I2C
     I2C_Cmd(I2C1, ENABLE);
@@ -49,6 +44,7 @@ void I2C_StartTransmission(I2C_TypeDef* I2Cx, uint8_t transmissionDirection,  ui
     // Generating I2C Start bit
     I2C_GenerateSTART(I2Cx, ENABLE);
     // Ждем пока взлетит нужный флаг
+		//Checking the BUSY, MSL, ADDR, and relevant flags 
     while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_MODE_SELECT));
     // Sending 7 bit slave address
     I2C_Send7bitAddress(I2Cx, slaveAddress<<1, transmissionDirection);

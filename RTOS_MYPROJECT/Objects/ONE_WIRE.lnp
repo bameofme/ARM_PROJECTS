@@ -19,6 +19,7 @@
 ".\objects\delay_func.o"
 ".\objects\ctr_fan.o"
 ".\objects\adc_ctr_fan.o"
+".\objects\stm32f4xx_can.o"
 ".\objects\stm32f4xx_rcc.o"
 ".\objects\stm32f4xx_usart.o"
 ".\objects\stm32f4xx_gpio.o"

@@ -111,7 +111,8 @@ void LCDI2C_begin(uint8_t cols, uint8_t lines) {//, uint8_t dotsize) {
 	LCDI2C_command(LCD_ENTRYMODESET | lcdi2c.displaymode);
 
 	LCDI2C_home();
-
+	
+	LCDI2C_backlight();	
 }
 
 /********** high level commands, for the user! */
@@ -239,7 +240,7 @@ void LCDI2C_send(uint8_t value, uint8_t mode) {
 }
 
 void LCDI2C_write4bits(uint8_t value) {
-	LCDI2C_expanderWrite(value);
+	//LCDI2C_expanderWrite(value);
 	LCDI2C_pulseEnable(value);
 }
 
@@ -253,7 +254,8 @@ void LCDI2C_pulseEnable(uint8_t _data){
 	LCDI2C_expanderWrite(_data | En);	// En high
 	Delay_us(1);		// enable pulse must be >450ns
 
-	LCDI2C_expanderWrite(_data & ~En);	// En low
+//	LCDI2C_expanderWrite(_data & ~En);	// En low
+	LCDI2C_expanderWrite(~En);	// En low
 	Delay_us(40);		// commands need > 37us to settle
 }
 

@@ -176,8 +176,7 @@ void  SendInitialization(void)
 
 	ONEWIRE_OUTPUT_LOW;				//pull to LOW
 	Delay_us(500);
-
-//	ONEWIRE_OUTPUT_HIGH;			
+			
 	ONEWIRE_CONFIG_INPUT;			//releasing bus
 	Delay_us(500);
 }
@@ -196,7 +195,7 @@ void  SendByte(uint8_t  val)
 		Delay_us(95);
 		ONEWIRE_OUTPUT_HIGH;
 		Delay_us(5);
-		val = val >> 1;
+		val = val >> 1;														//Shifting bit to right for transmitting 
 	}
 }
 
@@ -209,7 +208,7 @@ uint8_t  ReadByte(void)
 	val = 0;
 	for (n=0; n<8; n++)
 	{
-		val = val >> 1;
+		val = val >> 1;														//Shifting bit to right for receiving
 		ONEWIRE_OUTPUT_HIGH;
 		ONEWIRE_CONFIG_OUTPUT;
 		Delay_us(3);

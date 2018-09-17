@@ -32,12 +32,13 @@ void BUTTON_INIT()
 	EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising;
 	/* Add to EXTI */
 	EXTI_Init(&EXTI_InitStruct);
-
+	
+	//Relevant to this: https://www.freertos.org/RTOS-Cortex-M3-M4.html
 	/* Add IRQ vector to NVIC */
 	/* PD0 is connected to EXTI_Line1, which has EXTI1_IRQn vector */
 	NVIC_InitStruct.NVIC_IRQChannel = EXTI1_IRQn;
 	/* Set priority */
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x00;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x0F;
 	/* Set sub priority */
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x00;
 	/* Enable interrupt */
