@@ -33,7 +33,6 @@ void TIM_PWM_Init(void)
   TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Enable; 
   TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_High;
   TIM_OCInitStructure.TIM_Pulse = 0xFFFF;
-  //TIM_OCStructInit(&TIM_OCInitStructure);
   
   TIM_OC1Init(TIM5, &TIM_OCInitStructure);  
   TIM_OC1PreloadConfig(TIM5, TIM_OCPreload_Enable);
@@ -42,7 +41,6 @@ void TIM_PWM_Init(void)
  
   /* TIM1 enable counter */
   TIM_Cmd(TIM5, ENABLE);
-//  TIM_CtrlPWMOutputs(TIM5, ENABLE);		
 }
 
 

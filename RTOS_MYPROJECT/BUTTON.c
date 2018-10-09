@@ -38,7 +38,7 @@ void BUTTON_INIT()
 	/* PD0 is connected to EXTI_Line1, which has EXTI1_IRQn vector */
 	NVIC_InitStruct.NVIC_IRQChannel = EXTI1_IRQn;
 	/* Set priority */
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x0F;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x05;
 	/* Set sub priority */
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x00;
 	/* Enable interrupt */

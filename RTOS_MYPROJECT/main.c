@@ -44,6 +44,10 @@ int main(void)
 	
 	DELAY_Init();	  
 	LED_Init();
+	
+	//Relevant to this: https://www.freertos.org/RTOS-Cortex-M3-M4.html
+	NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+	
   BUTTON_INIT();
 	USART2_Init();
 	
@@ -89,11 +93,11 @@ int main(void)
 	//vTraceEnable(TRC_START);
   //uiTraceStart();	
 	
-	//Relevant to this: https://www.freertos.org/RTOS-Cortex-M3-M4.html
-	NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+	
 	
 	
 	xSemaphore = xSemaphoreCreateBinary();
+	xButton_Semaphore = xSemaphoreCreateBinary();
 	
 	if(xSemaphore != NULL)
 	{		
@@ -101,12 +105,12 @@ int main(void)
 						"Task 1",	/* Text name for the task.  This is to facilitate debugging only. */
 						200,		/* Stack depth in words. 200 * 4  */
 						NULL,		/* We are not using the task parameter. */
-						1,			/* This task will run at priority 1. */
+						4,			/* This task will run at priority 1. */
 						NULL );		/* We are not using the task handle. */
 
 		/* Create the other task in exactly the same way. */
 		xTaskCreate( vTask2, "Task 2", 200, NULL, 1, NULL );
-		xTaskCreate( vTask3, "Task 3", 200, NULL, 1, NULL );
+		xTaskCreate( vTask3, "Task 3", 200, NULL, 5, NULL );
 		/* lets create the binary semaphore dynamically */		
 		
 		/* lets make the semaphore token available for the first time */
@@ -140,7 +144,7 @@ TickType_t xLastWakeTime;
 		#ifdef DelayUntil 
 			vTaskDelayUntil( &xLastWakeTime, xDelay );
 		#endif
-		if(xSemaphoreTake( xSemaphore, ( TickType_t ) portMAX_DELAY )==pdTRUE)
+		if(xSemaphoreTake( xSemaphore, ( TickType_t ) portMAX_DELAY ) == pdTRUE)
 		{
 			
 			#ifdef DEBUG_BY_TICK
@@ -159,8 +163,7 @@ TickType_t xLastWakeTime;
 			#ifdef DelayOnly
 				vTaskDelay( xDelay );		
 			#endif
-		}
-		
+		}		
 	}
 }
 /*-----------------------------------------------------------*/
@@ -218,7 +221,7 @@ void vTask3( void *pvParameters )
 {
 const char *pcTaskName = "Task 3 is running\r\n";
 volatile unsigned long ul;
-const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
+const TickType_t xDelay = 150 / portTICK_PERIOD_MS;
 
 	/* As per most tasks, this task is implemented in an infinite loop. */
 	for( ;; )
@@ -235,24 +238,37 @@ const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
 			/*Checking if *flag* from the interrupt function is SET.
 				It would delay from amount of time because of the unstable of the button.
 				Then reset the flag for the next time.
-				If the flag is SET -> switching modes (Auto_Mode and User_Mode)*/
-			if(flag == SET)									
+				If the flag is SET -> switching modes (Auto_Mode and User_Mode)
+				Uncomment to used the below codes. This was the early version of switing mode \
+				by seting/reseting flag variable*/
+			/*
+			if(flag == SET)
 			{
-				vTaskDelay(125/portTICK_PERIOD_MS);
+				vTaskDelay(150/portTICK_PERIOD_MS);
 				flag = RESET;
+				user_Mode = ~user_Mode;
+			}
+			*/
+			
+			/*Checking if *xButton_Semaphore* is Giving by external interrupt button.
+				It would delay from amount of time because of the unstable of the button.
+				Then switching modes (Auto_Mode and User_Mode)*/
+			if(xSemaphoreTake( xButton_Semaphore, ( TickType_t ) 0 ))
+			{
 				user_Mode = ~user_Mode;
 			}
 			
 			//Enter the user_Mode or Auto_mode by checking the user_Mode variable
 			//The user_Mode would driving the FAN speed manually by changing the potentiometer - from the ADC
-			//The auto_Mode would driving the FAN speed automatically by its algorithms according to the temperature data from sensor 
+			//The auto_Mode would driving the FAN speed automatically by its algorithms according to \
+			the temperature data from sensor 
 			if(user_Mode != 0)								//Enter User_Mode
 			{
 				LED_ON();
 				printf("Enter User Mode\r\n\n");				
 				if(xTask4 == NULL)
 				{
-					xTaskCreate( vTask4, "Task 4", 200, NULL, 1, &xTask4 );
+					xTaskCreate( vTask4, "Task 4", 200, NULL, 3, &xTask4 );
 				}
 			}			
 			else if(user_Mode == 0)						//Enter Auto_Mode
@@ -302,7 +318,7 @@ void vTask4( void *pvParameters )
 			
 			printf( "%s\n",pcTaskName );
 			reading_ADC = ADC_Read()  ;	
-			reading_ADC = (reading_ADC * 100) / 0x0FFF;
+			reading_ADC = (reading_ADC * 100) / 0x0FFF; //Caculating percentage of reading value in 12-bits value 
 			printf("FAN's speed: ");
 			printf("%d%%\r\n\n",reading_ADC);						//Monitor in percentage
 			fan_Speed = 100 - reading_ADC;							//Calculating fan_Speed to duty-cycle
@@ -316,8 +332,6 @@ void vTask4( void *pvParameters )
 		}
 	}
 }
-
-
 
 void readingFunction()
 {
@@ -389,16 +403,10 @@ void EXTI1_IRQHandler(void) {
 	/* Make sure that interrupt flag is set */
 	if (EXTI_GetITStatus(EXTI_Line1) != RESET) {
 		
-		flag = SET;
-//		user_Mode = ~user_Mode;
+		//flag = SET; 			//another way for changing system mode
 		
-//		LED_ON();
-//		for(uint32_t i = 0; i < 450000; i++)	//Delay ~196ms -- ~174ms with 400.000
-//		{
-//			__asm__("nop");											
-//		}		
-//		LED_OFF();
-		
+		//Giving Semaphore from ISR to be able to change system mode
+		xSemaphoreGiveFromISR(xButton_Semaphore, NULL);
 		/* Clear interrupt flag */
 		EXTI_ClearITPendingBit(EXTI_Line1);
 	}

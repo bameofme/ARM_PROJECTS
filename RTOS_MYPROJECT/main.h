@@ -73,7 +73,6 @@ void vTask2( void *pvParameters );
 void vTask3( void *pvParameters );
 void vTask4( void *pvParameters );
 
-
 void checking_Button( void );
 void readingFunction(	void );
 void displayFunction( char *str, char *mode);
@@ -81,6 +80,7 @@ void auto_Fan(const volatile float *temperature);
 void driving_Fan(const uint16_t *value);
 
 SemaphoreHandle_t xSemaphore = NULL;
+SemaphoreHandle_t xButton_Semaphore = NULL;
 TaskHandle_t xTask4 = NULL;
 
 

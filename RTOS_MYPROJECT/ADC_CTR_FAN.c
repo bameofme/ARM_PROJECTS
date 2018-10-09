@@ -2,9 +2,7 @@
 
 
 void Adc_Start_Init()
-{
- 
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+{ 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);  
 	
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -25,8 +23,7 @@ void Adc_Start_Init()
 	ADC_Init(ADC1, &ADC_InitStruct);
 	ADC_Cmd(ADC1, ENABLE);
 	
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_84Cycles);
-	
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_84Cycles);	
 }
 
 uint16_t ADC_Read()
