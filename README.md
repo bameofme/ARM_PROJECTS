@@ -19,7 +19,7 @@ Contain
 	- Delay and LCD_I2C libraries from ***[here](https://stm32f4-discovery.net/2014/05/13-reading-temperature-with-dallas-ds18b20-on-stm32f429-discovery-board/)***
 
 * Technical report
-	- This is my thesis and I have not done it yet. However, the technical document part is ready, you could see it ***[here](https://drive.google.com/file/d/1MV-4l5O9l09UoeCjdMkmwYL2ARdTLX4X/view?usp=sharing)***
+	- This is my thesis and I have not done it yet. However, the technical document part is ready, you could see it ***[here](https://drive.google.com/file/d/12M3WRhC2MvTL8rgA648u5TQxFah5WbNV/view?usp=sharing)***
 
 Note
 ------
