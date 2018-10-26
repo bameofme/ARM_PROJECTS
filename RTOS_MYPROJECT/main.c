@@ -1,30 +1,21 @@
 /**
   ******************************************************************************
-  * @file    Project/STM32F4xx_StdPeriph_Templates/main.c 
-  * @author  MCD Application Team
-  * @version V1.8.0
-  * @date    04-November-2016
-  * @brief   Main program body
+  * @file    ARM-Project/main.c
+  * @author  Nhut Tran
+  * @date    01-Ocotber-2018
+  * @brief   Main program of ARM-project
   ******************************************************************************
   * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
+  *	This file is based on the example file of ST company
+	* This system would demonstrate the smart home system
+	*	The system shall have:
+	* 1. Data acquisition function to collect temperature
+	*	2. Displaying function to display the data on LCD
+	* 3. Driving fan(motor) according to temperature data in auto-mode
+	* 4. Driving fan(motor) according to the changing input voltage from potentiometer
   ******************************************************************************
   */
-
+  
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -36,11 +27,6 @@
 int main(void)
 {	
 	SystemInit();
-	
-	//SystemCoreClockConfigure(); 
-	//SystemCoreClockUpdate();
-	
-  //SysTick_Config(SystemCoreClock / 1000);	
 	
 	DELAY_Init();	  
 	LED_Init();
@@ -69,10 +55,6 @@ int main(void)
 	OneWire_Init();
 	
 	LCDI2C_init(0x3F,20,4);
-//	LCDI2C_noBacklight();
-//	Delay_ms(500);
-//  LCDI2C_backlight();	
-//  LCDI2C_clear();	
 	
 	LCDI2C_setCursor(2,0);
 	LCDI2C_write_String("Welcome To Thesis");
@@ -86,15 +68,14 @@ int main(void)
 	//Init Timer 
 	TIM_PWM_Init();
 	
+	//Uncommend below code to start recording data for Tracealyzer
 	/* initialize the recorder */
 	//vTraceEnable(TRC_INIT);	
 	
 	/* start the recorder */
 	//vTraceEnable(TRC_START);
   //uiTraceStart();	
-	
-	
-	
+		
 	
 	xSemaphore = xSemaphoreCreateBinary();
 	xButton_Semaphore = xSemaphoreCreateBinary();
@@ -123,11 +104,11 @@ int main(void)
 
 /**
 	*TASK 1
-	*	
-	*
-	*
-***/
-//Execution time ~ 30 ticks 
+	*	Task 1 shall be data acquisition task
+	* Task 1 shall call readingFunction to read the temperature from 1-wire sensor
+	*	Task 1 shall be in Ready State precisely every 100ms (due to the requirements of precision) using vTaskDelayUntil API function
+	* Task 1 could take ~26 ticks (26ms)
+**/
 void vTask1( void *pvParameters )
 {
 const char *pcTaskName = "Task 1 is running\r\n";
@@ -169,9 +150,10 @@ TickType_t xLastWakeTime;
 /*-----------------------------------------------------------*/
 /**
 	*TASK 2
-	*	
-	*
-	*
+	*	Task 2 shall be displaying task 
+	*	Task 2 shall call displayFunction to send the data to LCD 
+	* Task 2 shall be in Ready State after 350ms
+  * Task 2 could take ~34 ticks (34ms)
 ***/
 void vTask2( void *pvParameters )
 {
@@ -212,11 +194,18 @@ char											*mode[] = {"Auto Mode", "User Mode"};
 /*-----------------------------------------------------------*/
 /**
 	*TASK 3
-	*	
-	*
-	*
+	*	Task 3 shall be driving fan(motor) task in auto-mode
+	* Task 3 shall try to acquire the xButton_Semaphore to switch between user-mode and auto-mode
+	* Task 3 shall driving fan(motor) according to temperature data if the system is in auto-mode
+* In auto-mode: 
+	* Task 3 shall check the existence of Task 4. Task 3 shall delete task 4 if Task 4 is created.
+	* Task 3 shall calll auto_Fan to drive fan(motor)
+* In user-mode:
+	* Task 3 shall check the existence of Task 4. Task 3 shall create task 4 if Task 4 is not created.
+	
+	* Task 3 could take ~5 ticks (5ms) as usual
+	* Task 3 could take ~9 ticks (9ms) if the interrupt is triggered
 ***/
-//Execution time ~ 5ticks
 void vTask3( void *pvParameters )
 {
 const char *pcTaskName = "Task 3 is running\r\n";
@@ -251,7 +240,6 @@ const TickType_t xDelay = 150 / portTICK_PERIOD_MS;
 			*/
 			
 			/*Checking if *xButton_Semaphore* is Giving by external interrupt button.
-				It would delay from amount of time because of the unstable of the button.
 				Then switching modes (Auto_Mode and User_Mode)*/
 			if(xSemaphoreTake( xButton_Semaphore, ( TickType_t ) 0 ))
 			{
@@ -296,9 +284,10 @@ const TickType_t xDelay = 150 / portTICK_PERIOD_MS;
 /*-----------------------------------------------------------*/
 /**
 	*TASK 4
-	*	
-	*
-	*
+	*	Task 4 shall driving fan(motor) in user-mode
+	* Task 4 shall call ADC_read function to read the input voltage from potentiometer
+	* Task 4 shall call driving_Fan function to drive fan(motor) according to reading value
+	* Task 4 could take 5 ticks (5ms) 
 ***/
 void vTask4( void *pvParameters )
 {
@@ -333,13 +322,23 @@ void vTask4( void *pvParameters )
 	}
 }
 
+/**
+	* readingFunction 
+	* readingFunction shall send the reset pulse to 1-wire sensor first
+	* readingFunction shall call ReportTemperature to send the reading command to reading the temperature data on 1-wire sensor
+**/
 void readingFunction()
 {
 	StartConversion();
 	Delay_ms(1);
 	reading_Temp = ReportTemperature_2();
 }
-
+/**
+	* auto_Fan function
+	* auto_Fan function shall take temperature data as the const pointer to prevent the unintended changing
+	* auto_Fan shall drive fan(motor) according to the temperature data by passing reading speed_Value to driving_Fan function
+	* auto_Fan function could be done by using fuzzy logic to match the input value to resonable output value
+**/
 
 void auto_Fan(const volatile float *temperature)
 {
@@ -361,6 +360,11 @@ void auto_Fan(const volatile float *temperature)
 	}	
 }
 
+/**
+	* driving_Fan function
+	* driving_Fan shall take value as const pointer to prevent the unintended changing
+	* driving_Fan shall generate the PWM signal to drive fan(motor) by passing the value into the CCR1 register of Timer 5
+**/
 void driving_Fan(const uint16_t *value)
 {
 	TIM5->CCR1 = *value * 65535 / 100;

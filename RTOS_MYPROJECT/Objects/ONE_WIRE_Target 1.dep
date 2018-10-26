@@ -1,6 +1,6 @@
 Dependencies for Project 'ONE_WIRE', Target 'Target 1': (DO NOT MODIFY !)
-F (.\main.c)(0x5BAF7ACE)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\RTOS_MYPROJECT -I .\CMSIS\Device -I .\CMSIS\Device\ST\STM32F4xx\Include -I .\CMSIS\Device\ST\STM32F4xx\Source -I .\STM32F4xx_StdPeriph_Driver -I .\STM32F4xx_StdPeriph_Driver\inc -I .\STM32F4xx_StdPeriph_Driver\src -I .\TraceRecorder -I .\TraceRecorder\include -I .\RTOS -I .\RTOS\include-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F411xE -DUSE_LIB_DRIVER --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (main.h)(0x5BBCE75E)
+F (.\main.c)(0x5BD35FC2)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\RTOS_MYPROJECT -I .\CMSIS\Device -I .\CMSIS\Device\ST\STM32F4xx\Include -I .\CMSIS\Device\ST\STM32F4xx\Source -I .\STM32F4xx_StdPeriph_Driver -I .\STM32F4xx_StdPeriph_Driver\inc -I .\STM32F4xx_StdPeriph_Driver\src -I .\TraceRecorder -I .\TraceRecorder\include -I .\RTOS -I .\RTOS\include-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F411xE -DUSE_LIB_DRIVER --C99-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (main.h)(0x5BD3615B)
 I (.\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5B5755D2)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E7442)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588BD7A4)
@@ -52,7 +52,7 @@ I (.\RTOS\include\semphr.h)(0x5A3842D8)
 I (.\RTOS\include\queue.h)(0x5A3842D8)
 I (CTR_FAN.h)(0x5B634BCC)
 I (ADC_CTR_FAN.h)(0x5B69399D)
-F (.\main.h)(0x5BBCE75E)()
+F (.\main.h)(0x5BD3615B)()
 F (.\RTOS\croutine.c)(0x5A3842D8)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\RTOS_MYPROJECT -I .\CMSIS\Device -I .\CMSIS\Device\ST\STM32F4xx\Include -I .\CMSIS\Device\ST\STM32F4xx\Source -I .\STM32F4xx_StdPeriph_Driver -I .\STM32F4xx_StdPeriph_Driver\inc -I .\STM32F4xx_StdPeriph_Driver\src -I .\TraceRecorder -I .\TraceRecorder\include -I .\RTOS -I .\RTOS\include-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F411xE -DUSE_LIB_DRIVER --C99-o .\objects\croutine.o --omf_browse .\objects\croutine.crf --depend .\objects\croutine.d)
 I (.\RTOS\include\FreeRTOS.h)(0x5A3842D8)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x588BD7A4)
