@@ -22,7 +22,7 @@ Contain
 	- Other information, desciptions of this project would be found in the below technical report.
 
 * Technical report
-	- This is my thesis and I have not done it yet. However, the technical document part is ready, you could see it ***[here](https://drive.google.com/file/d/12M3WRhC2MvTL8rgA648u5TQxFah5WbNV/view?usp=sharing)***
+	- This is my thesis and I have not done it yet. However, the technical document part is ready, you could see it ***[here](https://drive.google.com)***
 
 Note
 ------
